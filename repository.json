@@ -1,5 +1,5 @@
 {
-    "name": "MQTT Irigation Standalone Config",
+    "name": "MQTT Irrigation Standalone Config",
     "url": "https://github.com/cllorens/IrrigationControlJsonMQTT",
     "maintainer": "Carlos Llorens <cdavid@upv.es>"
 }
