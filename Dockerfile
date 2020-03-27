@@ -7,6 +7,4 @@ COPY /web /var/www/html
 COPY run.sh /
 RUN chmod a+x /run.sh
 
-EXPOSE 7777
-
 CMD [ "/run.sh" ]
