@@ -4,7 +4,7 @@ FROM php:7.3-apache
 COPY 000-default.conf /etc/apache2/sites-enabled
 COPY /web /var/www/html
 
-COPY run.sh /
-RUN chmod a+x /run.sh
+COPY run.sh /home
+RUN chmod a+x /home/run.sh
 
-CMD [ "/run.sh" ]
+CMD /home/run.sh
