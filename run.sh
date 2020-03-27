@@ -1,5 +1,9 @@
-#!/usr/bin/with-contenv bashio
+FOLDER=/share/irrigationscheduler
 
-echo Hello world!
+mkdir -p $FOLDER
 
-while true; do foo; sleep 2; done
+chmod -R 777 $FOLDER
+
+php /var/www/html/irrigation.php >> $FOLDER/irrigation.log &
+
+apache2-foreground
