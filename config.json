@@ -1,17 +1,18 @@
 {
   "name": "Irrigation JSON MQTT SCHEDULER",
-  "version": "1",
-  "slug": "IrrigationScheduler",
+  "version": "0.1",
+  "slug": "irrigationscheduler",
   "description": "A Scheduler that put the scheduling table in JSON in a MQTT Message",
+  "url": "https://github.com/arthurdent75/SimpleScheduler",
   "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
   "startup": "application",
   "panel_icon": "mdi:calendar-clock",
   "panel_title": "Irrigation",
   "panel_admin": false,
+  "boot": "auto",
   "hassio_api": true,
   "homeassistant_api": true,
   "ingress": true,
-  "boot": "auto",
   "map": [ "share:rw" ],
   "options": {
 	"translations": {
