@@ -1,10 +1,12 @@
-ARG BUILD_FROM
-FROM $BUILD_FROM
-
-ENV LANG C.UTF-8
+FROM php:7.3-apache
 
 # Copy data for add-on
+COPY 000-default.conf /etc/apache2/sites-enabled
+COPY /web /var/www/html
+
 COPY run.sh /
 RUN chmod a+x /run.sh
+
+EXPOSE 7777
 
 CMD [ "/run.sh" ]
