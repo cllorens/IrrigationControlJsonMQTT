@@ -1,5 +1,5 @@
 <?php
-	require("phpMQTT.php");
+	require("./phpMQTT.php");
 	echo "Starting...\n";
 	
 	$server = "cdavid.gnd.upv.es";     // change if necessary
