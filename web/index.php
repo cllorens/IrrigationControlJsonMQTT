@@ -18,5 +18,4 @@
 		$mqtt->close();
 		}
 	else {echo "Time out!\n";}
-
  ?>

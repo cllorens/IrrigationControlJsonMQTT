@@ -16,7 +16,7 @@
     {
 	if ($mqtt->connect(true, NULL, $username, $password))
 		{
-		$mqtt->publish("bluerhinos/phpMQTT/examples/publishtest", "Hello World! at " . date("r"), 0);
+		$mqtt->publish("bluerhinos/phpMQTT/examples/publishtest", "Hello World! at " . date("r"), 1);
 		$mqtt->close();
 		}
 	else {echo "Time out!\n";}
