@@ -4,9 +4,9 @@
 
 	use \Bluerhinos\phpMQTT as phpMQTT;
 
-	$server = "cdavidcloud.gnd.upv.es";     // change if necessary
+	$server = "homeassistant.local";     // change if necessary
 	$port = 1883;                     // change if necessary
-	$username = "MQTT";                   // set your username
+	$username = "mqtt";                   // set your username
 	$password = "Mqtt2020";                   // set your password
 	$client_id = "irrgation-addon"; // make sure this is unique for connecting to sever - you could use uniqid()
 
@@ -14,7 +14,7 @@
 
 	if ($mqtt->connect(true, NULL, $username, $password))
 		{
-		$mqtt->publish("bluerhinos/phpMQTT/examples/publishtest", "Hello World! at " . date("r"), 1,1);
+		$mqtt->publish("TEST2t", "Hello World! at " . date("r"), 1,1);
 		$mqtt->close();
 		}
 	else {echo "Time out!\n";}

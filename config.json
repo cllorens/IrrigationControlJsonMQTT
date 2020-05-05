@@ -5,7 +5,7 @@
   "description": "A Scheduler that put the scheduling table in JSON in a MQTT Message",
   "url": "https://github.com/cllorens/IrrigationControlJsonMQTT",
   "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
-  "startup": "initialize",
+  "startup": "application",
   "panel_icon": "mdi:sprinkler-variant",
   "panel_title": "Irrigation",
   "panel_admin": false,
