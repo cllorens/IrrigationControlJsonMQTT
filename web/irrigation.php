@@ -12,7 +12,7 @@
 
 	if ($mqtt->connect(true, NULL, $username, $password))
 		{
-		$mqtt->publish("TEST", "Hello World! at " . date("r"), 1,true);
+		$mqtt->publish("TEST", "Hello World! at " . date("r"), 1);
 		$mqtt->close();
 		}
 	else {echo "Time out!\n";}
