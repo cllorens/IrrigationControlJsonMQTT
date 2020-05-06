@@ -2,7 +2,7 @@
 	require("phpMQTT.php");
 	echo "Starting...\n";
 
-	$server = "hassio";     // change if necessary
+	$server = "homeassistant.local";     // change if necessary
 	$port = 1883;                     // change if necessary
 	$username = "mqtt";                   // set your username
 	$password = "Mqtt2020";                   // set your password
