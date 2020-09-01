@@ -17,7 +17,7 @@ $options = json_decode(file_get_contents($options_json_file) );
 $Parameters = array_merge(array_change_key_case($_GET, CASE_LOWER),array_change_key_case($_POST, CASE_LOWER));
 
 // MQTT SERVER
-$server 	= "homeassistant.local";    
+$server 	= "hassio";    
 $port 		= 1883;
 $username 	= "mqtt";
 $password 	= "Mqtt2020";
