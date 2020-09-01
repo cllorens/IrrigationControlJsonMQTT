@@ -1,0 +1,275 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>Irrigation JSON MQTT SCHEDULER</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/tempusdominus-bootstrap-4.min.css" rel="stylesheet">
+<link href="css/alertify.core.css" rel="stylesheet"/>
+	
+<script src="js/jquery-3.4.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/moment.min.js"></script>
+<script src="js/tempusdominus-bootstrap-4.min.js"></script>
+<script src="js/alertify.min.js"></script>
+
+<style>
+.top-buffer { margin-top:10px; }
+.bottom-buffer { margin-bottom:10px; }
+
+.timeselect {width: 160px;}
+.backgroundcolor {background-color: #ebf7fa;}
+</style>
+
+</head>
+  <body>
+
+    <div class="container backgroundcolor">
+	<div class="row">
+	<object type="image/svg+xml" data="riego.svg" class="mx-auto d-block top-buffer bottom-buffer" id="svg" width="60%"></object>	
+	</div>
+	</div>
+	
+	<div id='SCHEDULES'><br><br><center>CONECTING WITH MQTT SERVER</center></div>
+
+    <script type="text/javascript">
+	
+	if (!!window.EventSource)
+      {
+      var source = new EventSource("eventMQTT.php?dummy="+Math.random());
+      source.addEventListener("message", function(e) {ModifyHtml(e.data);}, false);
+      source.addEventListener("open", function(e) {console.log("OPENED MQTT EVENT");}, false);
+      source.addEventListener("error", function(e) {console.log("ERROR MQTT EVENT");}, false);
+      } else alert("EventSource not supported!");
+    
+	// ON EVENT MODIFY PRODUCTS
+
+	function ModifyHtml(res)
+		{
+		if (res.indexOf("KO")!=-1) alertify.error(res);
+		else 
+			{
+			// Parse event
+			var schedules = JSON.parse(res);
+			console.log(res);
+			
+			// create html
+			var html="";
+			
+			for (const [sch, schedule] of Object.entries(schedules))
+				{
+				// SET CONTAINER
+				html+='<div class="container backgroundcolor">';
+				html+='<div class="row top-buffer">';
+				
+				////////////////////////
+				// OUT BUTTONS 
+				////////////////////////
+				html+='<div class="col-auto top-buffer">';
+				html+='<div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">';
+				
+				// BUTTON GROUP LABEL
+				html+='<div class="input-group-prepend">';
+				html+='<span class="input-group-text">OUT:</span>';
+				html+='</div>';
+				
+				// CREATE BUTTONS
+				for (var out=0;out<3;out++)
+					{
+					html+='<label class="btn btn-secondary ';
+					if (schedule.OUT==out) html+='active';
+					html+='"><input type="radio" name="OUT_'+sch+'" id="OUT_'+sch+'_'+out+'" value="'+out+'" ';
+					if (schedule.OUT==out) html+='checked';
+					if (out==0) html+='>OFF'; else html+='>'+out;
+					html+='</label>';
+					}
+
+				// CLOSE BUTTON GROUP DIVS
+				html+='</div>';
+				html+='</div>';
+				
+				////////////////////////
+				// TIME SELECT
+				////////////////////////
+				html+='<div class="col-auto top-buffer timeselect">';
+				html+='<div class="input-group date" id="datetimepicker'+sch+'" sch='+sch+' data-target-input="nearest" width="50px">';
+				html+='<input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker3"/>';
+				html+='<div class="input-group-append" data-target="#datetimepicker'+sch+'" data-toggle="datetimepicker">';
+				html+='<div class="input-group-text"><i class="fa fa-clock-o"></i></div>';
+				html+='</div>';
+				html+='</div>';
+				html+='</div>';
+				
+				////////////////////////
+				// MINUTES BUTTONS 
+				////////////////////////
+				html+='<div class="col-auto  top-buffer">';
+				html+='<div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">';
+				
+				// BUTTON GROUP LABEL
+				html+='<div class="input-group-prepend">';
+				html+='<span class="input-group-text">MINUTOS:</span>';
+				html+='</div>';
+				
+				// CREATE BUTTONS
+				for (var min=1;min<=10;min++)
+					{
+					html+='<label class="btn btn-secondary ';
+					if (schedule.MINUTES==min) html+='active';
+					html+='"><input type="radio" name="MINUTES_'+sch+'" id="MINUTES_'+sch+'_'+min+'" value="'+min+'" ';
+					if (schedule.MINUTES==min) html+='checked';
+					html+='>'+min;
+					html+='</label>';
+					}
+
+				// CLOSE BUTTON GROUP DIVS
+				html+='</div>';
+				html+='</div>';
+
+				////////////////////////
+				// DAYS BUTTONS 
+				////////////////////////
+				html+='<div class="col-auto  top-buffer">';
+				html+='<div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons" id="DAYS_'+sch+'">';
+				
+				// BUTTON GROUP LABEL
+				html+='<div class="input-group-prepend">';
+				html+='<span class="input-group-text">DIAS:</span>';
+				html+='</div>';
+				var days = ["", "LUN", "MAR", "MIE", "JUE", "VIE", "SAB", "DOM"];
+				
+				// CREATE BUTTONS
+				for (var day=1;day<=7;day++)
+					{
+					html+='<label class="btn btn-secondary ';
+					if (schedule.DAYS[day]==1) html+='active';
+					html+='"><input type="checkbox" name="DAYS_'+sch+'_'+day+'" id="DAYS_'+sch+'_'+day+'" ';
+					if (schedule.DAYS[day]==1) html+='checked';
+					html+='>'+days[day];
+					html+='</label>';
+					}
+
+				// CLOSE BUTTON GROUP DIVS
+				html+='</div>';
+				html+='</div>';
+
+				////////////////////////
+				// SEASONS BUTTONS 
+				////////////////////////
+				html+='<div class="col-auto  top-buffer">';
+				html+='<div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">';
+				
+				// BUTTON GROUP LABEL
+				html+='<div class="input-group-prepend">';
+				html+='<span class="input-group-text">ESTACI&OacuteN:</span>';
+				html+='</div>';
+				var seasons = ["", "PRIMAVERA", "VERANO", "OTO&Ntilde;O", "INVIERNO"];
+				
+				// CREATE BUTTONS
+				for (var sea=1;sea<=4;sea++)
+					{
+					html+='<label class="btn btn-secondary ';
+					if (schedule.SEASONS[sea]==1) html+='active';
+					html+='"><input type="checkbox" name="SEASONS_'+sch+'_'+sea+'" id="SEASONS_'+sch+'_'+sea+'" ';
+					if (schedule.SEASONS[sea]==1) html+='checked';
+					html+='>'+seasons[sea];
+					html+='</label>';
+					}
+
+				// CLOSE BUTTON GROUP DIVS
+				html+='</div>';
+				html+='</div>';
+
+				////////////////////////
+				// MANUAL BUTTONS 
+				////////////////////////
+				html+='<div class="col-auto top-buffer bottom-buffer">';
+				html+='<div class="btn-group btn-group-sm">';
+				
+				// BUTTON GROUP LABEL
+				html+='<div class="input-group-prepend">';
+				html+='<span class="input-group-text">MANUAL:</span>';
+				html+='</div>';
+				
+				// CREATE BUTTONS
+				for (var man=0;man<=5;man++)
+					{
+					html+='<button type="button" class="btn btn-secondary" onclick="MovePump('+sch+','+man+');">';
+					// STOP BUTTON	
+					if (man==0) html+='STOP';
+					else {html+=man;html+='min';}
+					html+='</button>';
+					}
+
+				// CLOSE BUTTON GROUP DIVS
+				html+='</div>';
+				html+='</div>';
+				
+				// PUBLISH BUTTON
+				html+='<div class="col-auto top-buffer bottom-buffer">';
+				html+='<button type="button" class="btn btn-primary btn-sm" onclick="publishdata('+sch+');">PUBLICAR</button>';
+				html+='</div>';
+				
+				// CLOSE CONTAINER AND ROW DIVS
+				html+='</div>';
+				html+='</div>';
+				}
+
+			$("#SCHEDULES").html(html);
+			
+			for (const [sch, schedule] of Object.entries(schedules))
+				$('#datetimepicker'+sch).datetimepicker({format: 'HH:mm', date:moment({ hour: schedule.START_TIME.HOUR, minute: schedule.START_TIME.MINUTES })}); 
+				
+			}
+		}
+	//SEND MOVE PUMP
+	function MovePump(schedule,Time)
+		{
+		var OUT= $('input:radio[name=OUT_'+schedule+']:checked').val();
+		
+		var parameters={'out':OUT,'time':Time};
+
+		$.post('MovePump.php',parameters,
+		  function(res)
+		  {
+		  if (res.indexOf("OK")!=-1) alertify.success(res);
+		  if (res.indexOf("KO")!=-1) alertify.error(res);
+		  });
+		}
+		
+	// SEND JSON WITH SCHEDULE
+	function publishdata(schedule)
+		{
+		// JSON VARIABLE
+		var VALUE={
+		OUT: $('input:radio[name=OUT_'+schedule+']:checked').val(),
+		MINUTES: $('input:radio[name=MINUTES_'+schedule+']:checked').val(),
+		DAYS: {},
+		SEASONS: {},
+		START_TIME:{},
+		};
+		
+		// get date and set HOUR and MINUTES in START_TIME
+		var date = $('#datetimepicker'+schedule).datetimepicker('viewDate');
+		VALUE.START_TIME['HOUR']=date.format("HH");
+		VALUE.START_TIME['MINUTES']=date.format("mm");
+		
+		// SET DAYS
+		for (var day=1;day<=7;day++) VALUE.DAYS[day]=$('#DAYS_'+schedule+'_'+day).parent().hasClass('active');//
+		// SET SEASONS
+		for (var sea=1;sea<=4;sea++) VALUE.SEASONS[sea]=$('#SEASONS_'+schedule+'_'+sea).parent().hasClass('active');
+
+		var parameters={'schedule':schedule,'parameter':'JSON','json':JSON.stringify(VALUE)};
+
+		$.post('setirrigation.php',parameters,
+		  function(res)
+		  {
+		  if (res.indexOf("OK")!=-1) alertify.success(res);
+		  if (res.indexOf("KO")!=-1) alertify.error(res);
+		  });
+		}
+
+    </script>
+
+</html>

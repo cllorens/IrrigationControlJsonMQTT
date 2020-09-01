@@ -1,11 +1,11 @@
 {
   "name": "Irrigation JSON MQTT SCHEDULER",
-  "version": "0.1",
+  "version": "0.2",
   "slug": "irrigationscheduler",
   "description": "A Scheduler that put the scheduling table in JSON in a MQTT Message",
   "url": "https://github.com/cllorens/IrrigationControlJsonMQTT",
   "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
-  "startup": "application",
+  "startup": "initialize",
   "panel_icon": "mdi:sprinkler-variant",
   "panel_title": "Irrigation",
   "panel_admin": false,
@@ -15,58 +15,30 @@
   "ingress": true,
   "map": [ "share:rw" ],
   "options": {
-	"translations": {
-		"text_monday": "Monday",
-		"text_tuesday": "Tuesday",
-		"text_wednesday": "Wednesday",
-		"text_thursday": "Thursday",
-		"text_friday": "Friday",
-		"text_saturday": "Saturday",
-		"text_sunday": "Sunday",
-		"text_ON": "Turn ON",
-		"text_OFF": "Turn OFF",
-		"text_save": "Save",
-		"text_enabled": "Enabled",
-		"text_device": "Device"
+	"MQTT_Server": {
+		"host": "homeassistant.local",
+		"user": "mqtt",
+		"pass": "Mqtt2020",
+		"port": 1883,
+		"topic": "/irrigation/esclavas"
 	},
-	"components": {
-		"light": true,
-		"scene": true,
-		"switch": true,
-		"script": true,
-		"camera": true,
-		"climate": true,
-		"automation": true,
-		"input_boolean": true,
-		"media_player": true
+	"config": {
+		"NumSchedules": 10,
+		"clear": false
 	},
 	"debug" : false
   },
   "schema": {
-	"translations": {
-		"text_monday": "str",
-		"text_tuesday": "str",
-		"text_wednesday": "str",
-		"text_thursday": "str",
-		"text_friday": "str",
-		"text_saturday": "str",
-		"text_sunday": "str",
-		"text_ON": "str",
-		"text_OFF": "str",
-		"text_save": "str",
-		"text_enabled": "str",
-		"text_device": "str"
+	"MQTT_Server": {
+		"host": "str",
+		"user": "str",
+		"pass": "str",
+		"port": "int",
+		"topic": "str"
 	},
-	"components": {
-		"light": "bool",
-		"scene": "bool",
-		"switch": "bool",
-		"script": "bool",
-		"camera": "bool",
-		"climate": "bool",
-		"automation": "bool",
-		"input_boolean": "bool",
-		"media_player": "bool"
+	"config": {
+		"NumSchedules": "int",
+		"clear": "int"
 	},
 	"debug" : "bool"
   },
