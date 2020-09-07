@@ -1,6 +1,6 @@
 {
   "name": "Simple Scheduler",
-  "version": "0.15",
+  "version": "0.2",
   "slug": "simplescheduler",
   "description": "Simple timer on weekly base",
   "url": "https://github.com/arthurdent75/SimpleScheduler",
@@ -14,6 +14,7 @@
   "homeassistant_api": true,
   "ingress": true,
   "map": [ "share:rw" ],  
+  "services": [ "mqtt" ],
   "options": {
 	"translations": {
 		"text_monday": "Monday",
