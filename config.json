@@ -1,6 +1,6 @@
 {
   "name": "Irrigation JSON MQTT SCHEDULER",
-  "version": "0.2",
+  "version": "0.3",
   "slug": "irrigationscheduler",
   "description": "A Scheduler that put the scheduling table in JSON in a MQTT Message",
   "url": "https://github.com/cllorens/IrrigationControlJsonMQTT",
@@ -14,6 +14,7 @@
   "homeassistant_api": true,
   "ingress": true,
   "map": [ "share:rw" ],
+  "services": [ "mqtt:need" ],
   "options": {
 	"MQTT_Server": {
 		"host": "homeassistant.local",
