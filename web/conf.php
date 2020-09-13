@@ -17,11 +17,11 @@ $options = json_decode(file_get_contents($options_json_file) );
 $Parameters = array_merge(array_change_key_case($_GET, CASE_LOWER),array_change_key_case($_POST, CASE_LOWER));
 
 // MQTT SERVER
-$server 	= "hassio";    
-$port 		= 1883;
-$username 	= "mqtt";
-$password 	= "Mqtt2020";
-$topic		='irrigation/esclavas';
+$server 	= $options->MQTT_Server->host;    
+$port 		= $options->MQTT_Server->port;
+$username 	= $options->MQTT_Server->user;
+$password 	= $options->MQTT_Server->pass;
+$topic		= $options->MQTT_Server->topic;
 
 $NumSchedules=$options->config->NumSchedules;
 $clear= $options->config->clear;
