@@ -1,6 +1,6 @@
 {
   "name": "Irrigation JSON MQTT SCHEDULER",
-  "version": "0.6",
+  "version": "0.7",
   "slug": "irrigationscheduler",
   "description": "A Scheduler that put the scheduling table in JSON in a MQTT Message",
   "url": "https://github.com/cllorens/IrrigationControlJsonMQTT",
