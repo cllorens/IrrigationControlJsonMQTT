@@ -55,7 +55,7 @@
 			
 			if (isset($JSON["OUT"])) $CONFIG[$schedule]["OUT"]=$JSON["OUT"];
 			if (isset($JSON["START_TIME"]["HOUR"])) $CONFIG[$schedule]["START_TIME"]["HOUR"]=$JSON["START_TIME"]["HOUR"];
-			if (isset($JSON["START_TIME"]["MINUTES"])) $CONFIG[$schedule]["START_TIME"]["HOUR"]=$JSON["START_TIME"]["MINUTES"];
+			if (isset($JSON["START_TIME"]["MINUTES"])) $CONFIG[$schedule]["START_TIME"]["MINUTES"]=$JSON["START_TIME"]["MINUTES"];
 			if (isset($JSON["MINUTES"])) $CONFIG[$schedule]["MINUTES"]=$JSON["MINUTES"];
 			for ($d=1;$d<=7;$d++) if (isset($JSON["DAYS"][$d])) $CONFIG[$schedule]["DAYS"][$d]=$JSON["DAYS"][$d];
 			for ($s=1;$s<=4;$s++) if (isset($JSON["SEASONS"][$s])) $CONFIG[$schedule]["SEASONS"][$s]=$JSON["SEASONS"][$s];
