@@ -185,27 +185,27 @@
 				////////////////////////
 				// MANUAL BUTTONS 
 				////////////////////////
-				html+='<div class="col-auto top-buffer bottom-buffer">';
-				html+='<div class="btn-group btn-group-sm">';
+				<!-- html+='<div class="col-auto top-buffer bottom-buffer">'; -->
+				<!-- html+='<div class="btn-group btn-group-sm">'; -->
 				
-				// BUTTON GROUP LABEL
-				html+='<div class="input-group-prepend">';
-				html+='<span class="input-group-text">MANUAL:</span>';
-				html+='</div>';
+				<!-- // BUTTON GROUP LABEL -->
+				<!-- html+='<div class="input-group-prepend">'; -->
+				<!-- html+='<span class="input-group-text">MANUAL:</span>'; -->
+				<!-- html+='</div>'; -->
 				
-				// CREATE BUTTONS
-				for (var man=0;man<=5;man++)
-					{
-					html+='<button type="button" class="btn btn-secondary" onclick="MovePump('+sch+','+man+');">';
-					// STOP BUTTON	
-					if (man==0) html+='STOP';
-					else {html+=man;html+='min';}
-					html+='</button>';
-					}
+				<!-- // CREATE BUTTONS -->
+				<!-- for (var man=0;man<=5;man++) -->
+					<!-- { -->
+					<!-- html+='<button type="button" class="btn btn-secondary" onclick="MovePump('+sch+','+man+');">'; -->
+					<!-- // STOP BUTTON	 -->
+					<!-- if (man==0) html+='STOP'; -->
+					<!-- else {html+=man;html+='min';} -->
+					<!-- html+='</button>'; -->
+					<!-- } -->
 
-				// CLOSE BUTTON GROUP DIVS
-				html+='</div>';
-				html+='</div>';
+				<!-- // CLOSE BUTTON GROUP DIVS -->
+				<!-- html+='</div>'; -->
+				<!-- html+='</div>'; -->
 				
 				// PUBLISH BUTTON
 				html+='<div class="col-auto top-buffer bottom-buffer">';
@@ -262,6 +262,8 @@
 		for (var sea=1;sea<=4;sea++) VALUE.SEASONS[sea]=$('#SEASONS_'+schedule+'_'+sea).parent().hasClass('active');
 
 		var parameters={'schedule':schedule,'parameter':'JSON','json':JSON.stringify(VALUE)};
+		
+		//console.log(parameters);
 
 		$.post('setirrigation.php',parameters,
 		  function(res)
