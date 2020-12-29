@@ -7,4 +7,6 @@ chmod 777 /data/options.json
 
 php /var/www/html/irrigation.php >> $FOLDER/irrigation.log &
 
+chmod 777 /data/options.json
+
 apache2-foreground
